@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.post('/bitmex/order', async (req, res) => {
     console.log(req.body);
     let data = req.body;
-    let result = await api.openOrder(data);
+    let result = await api.setOrder(data);
     res.json(result);
 });
 
@@ -31,7 +31,7 @@ app.post('/bitmex/leverage', async (req, res) => {
 app.post('/testnet/order', async (req, res) => {
     console.log(req.body);
     let data = req.body;
-    let result = await api.openOrder(data);
+    let result = await api.setOrder(data);
     res.json(result);
 });
 

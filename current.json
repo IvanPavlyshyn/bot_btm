@@ -1,0 +1,338 @@
+[
+  {
+    "rootSymbol": "A50",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 124596880
+  },
+  {
+    "rootSymbol": "ADA",
+    "currency": "USD",
+    "turnover24h": 129294,
+    "turnover30d": 7345863,
+    "turnover365d": 10867733,
+    "turnover": 10867733
+  },
+  {
+    "rootSymbol": "B148",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 23392,
+    "turnover": 23392
+  },
+  {
+    "rootSymbol": "BAT",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 52885,
+    "turnover": 52885
+  },
+  {
+    "rootSymbol": "BCH",
+    "currency": "USD",
+    "turnover24h": 2464562,
+    "turnover30d": 80786061,
+    "turnover365d": 465018320,
+    "turnover": 465018320
+  },
+  {
+    "rootSymbol": "BFX",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 3673458
+  },
+  {
+    "rootSymbol": "BLOCKS",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 98338273,
+    "turnover": 98338273
+  },
+  {
+    "rootSymbol": "BVOL",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 48813214
+  },
+  {
+    "rootSymbol": "COIN",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 5103457
+  },
+  {
+    "rootSymbol": "DAO",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 168222
+  },
+  {
+    "rootSymbol": "DASH",
+    "currency": "USD",
+    "turnover24h": 529060,
+    "turnover30d": 20208594,
+    "turnover365d": 188161549,
+    "turnover": 192360884
+  },
+  {
+    "rootSymbol": "EOS",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 14309,
+    "turnover": 14309
+  },
+  {
+    "rootSymbol": "ETC",
+    "currency": "USD",
+    "turnover24h": 116571,
+    "turnover30d": 8110140,
+    "turnover365d": 22401901,
+    "turnover": 23224042
+  },
+  {
+    "rootSymbol": "ETH",
+    "currency": "USD",
+    "turnover24h": 2123928,
+    "turnover30d": 86649295,
+    "turnover365d": 697746754,
+    "turnover": 704929363
+  },
+  {
+    "rootSymbol": "FCT",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 1795116,
+    "turnover": 3362011
+  },
+  {
+    "rootSymbol": "FREEBTC",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 974097,
+    "turnover": 974097
+  },
+  {
+    "rootSymbol": "GNO",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 4280488,
+    "turnover": 4280488
+  },
+  {
+    "rootSymbol": "GREG",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 2996,
+    "turnover365d": 2996,
+    "turnover": 2996
+  },
+  {
+    "rootSymbol": "LSK",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 43832
+  },
+  {
+    "rootSymbol": "LTC",
+    "currency": "USD",
+    "turnover24h": 608793,
+    "turnover30d": 17583445,
+    "turnover365d": 118497821,
+    "turnover": 121749329
+  },
+  {
+    "rootSymbol": "NEO",
+    "currency": "USD",
+    "turnover24h": 338094,
+    "turnover30d": 10865143,
+    "turnover365d": 21808139,
+    "turnover": 21808139
+  },
+  {
+    "rootSymbol": "PAY",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 26737,
+    "turnover": 26737
+  },
+  {
+    "rootSymbol": "QTUM",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 2414170,
+    "turnover": 2414170
+  },
+  {
+    "rootSymbol": "REP",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 767757,
+    "turnover": 1416982
+  },
+  {
+    "rootSymbol": "SEGWIT",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 18822004,
+    "turnover": 18822004
+  },
+  {
+    "rootSymbol": "SNT",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 5298,
+    "turnover": 5298
+  },
+  {
+    "rootSymbol": "STR",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 15013,
+    "turnover": 15013
+  },
+  {
+    "rootSymbol": "TEZOS",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 3976846,
+    "turnover": 3976846
+  },
+  {
+    "rootSymbol": "WIN",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 445170
+  },
+  {
+    "rootSymbol": "XBC",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 91702574,
+    "turnover": 299510847
+  },
+  {
+    "rootSymbol": "XBE",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 300697091
+  },
+  {
+    "rootSymbol": "XBJ",
+    "currency": "USD",
+    "turnover24h": 8386442,
+    "turnover30d": 869851154,
+    "turnover365d": 5946566909,
+    "turnover": 6816167684
+  },
+  {
+    "rootSymbol": "XBK",
+    "currency": "USD",
+    "turnover24h": 27275639,
+    "turnover30d": 495038775,
+    "turnover365d": 2003799946,
+    "turnover": 2003799946
+  },
+  {
+    "rootSymbol": "XBT",
+    "currency": "USD",
+    "turnover24h": 422560978,
+    "turnover30d": 8900655892,
+    "turnover365d": 31330608363,
+    "turnover": 33213332818
+  },
+  {
+    "rootSymbol": "XBU",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 298303921
+  },
+  {
+    "rootSymbol": "XLM",
+    "currency": "USD",
+    "turnover24h": 50645,
+    "turnover30d": 871343,
+    "turnover365d": 1549838,
+    "turnover": 1549838
+  },
+  {
+    "rootSymbol": "XLT",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 0,
+    "turnover": 7672033
+  },
+  {
+    "rootSymbol": "XMR",
+    "currency": "USD",
+    "turnover24h": 309342,
+    "turnover30d": 15375408,
+    "turnover365d": 89201601,
+    "turnover": 92273714
+  },
+  {
+    "rootSymbol": "XRP",
+    "currency": "USD",
+    "turnover24h": 107500,
+    "turnover30d": 3014456,
+    "turnover365d": 20148232,
+    "turnover": 20151240
+  },
+  {
+    "rootSymbol": "XTZ",
+    "currency": "USD",
+    "turnover24h": 0,
+    "turnover30d": 0,
+    "turnover365d": 15906854,
+    "turnover": 15906854
+  },
+  {
+    "rootSymbol": "ZEC",
+    "currency": "USD",
+    "turnover24h": 148592,
+    "turnover30d": 8108907,
+    "turnover365d": 66438021,
+    "turnover": 69991654
+  },
+  {
+    "rootSymbol": "Total",
+    "currency": "USD",
+    "turnover24h": 465149432,
+    "turnover30d": 10524467465,
+    "turnover365d": 41221933921,
+    "turnover": 44995885166
+  }
+]

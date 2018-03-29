@@ -1,0 +1,38 @@
+[
+  {
+    "account": 55400,
+    "currency": "XBt",
+    "transactType": "Deposit",
+    "symbol": "",
+    "amount": 52378680,
+    "pendingDebit": 0,
+    "realisedPnl": 0,
+    "walletBalance": 52378680,
+    "unrealisedPnl": 0,
+    "marginBalance": 52378680
+  },
+  {
+    "account": 55400,
+    "currency": "XBt",
+    "transactType": "RealisedPNL",
+    "symbol": "XBTUSD",
+    "amount": -111349,
+    "pendingDebit": 0,
+    "realisedPnl": 80064,
+    "walletBalance": -31285,
+    "unrealisedPnl": -140000,
+    "marginBalance": -171285
+  },
+  {
+    "account": 55400,
+    "currency": "XBt",
+    "transactType": "Total",
+    "symbol": "",
+    "amount": 52267331,
+    "pendingDebit": 0,
+    "realisedPnl": 80064,
+    "walletBalance": 52347395,
+    "unrealisedPnl": -140000,
+    "marginBalance": 52207395
+  }
+]
