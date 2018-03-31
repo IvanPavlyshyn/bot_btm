@@ -63,10 +63,10 @@ const setOrder = (data) => {
 };
 
 
-const getPosition = (data) => {
+const getPosition = () => {
     const verb = 'GET';
     const path = '/api/v1/position';
-    //const data = {"symbol": "XBTUSD"}
+    const data = {"symbol": "XBTUSD"}
     const postBody = JSON.stringify(data);
     const headers = createHeaders(verb, path, postBody);
 
@@ -109,18 +109,43 @@ const walletSummary = () => {
 }
 
 
+const getInstrument = () => {
+    const verb = "GET";
+    const path = "/api/v1/instrument";
+    //const data = {"symbol": "XBTUSD"}
+    const postBody = JSON.stringify({ "symbol" : "XBTUSD", "count": "5"});
+    const headers = createHeaders(verb, path, postBody);
+
+    const requestOptions = {
+        headers: headers,
+        url: 'https://testnet.bitmex.com' + path,
+        method: verb,
+        body: postBody
+    };
+
+    return new Promise((resolve, reject) => {
+        request(requestOptions, function (error, response, body) {
+            if (error) reject(error);
+            else resolve(JSON.parse(body));
+        });
+    });
+}
+
+
 module.exports = {
     setOrder,
     setLeverage,
     getPosition,
-    walletSummary
+    walletSummary,
+    getInstrument
 };
 
 
-
+/*
 (async () => {
-    let result = await walletSummary();
-    console.log(result.pop().walletBalance);
+    let result = await getPosition();
+    console.log(result);
+    //console.log(result[0].lastPrice);
 })(); 
 
-setTimeout(() => {}, 10000);
+setTimeout(() => {}, 10000); */
