@@ -4,6 +4,7 @@ const express = require('express');
 const cfg = require('./config');
 const app = express();
 const api = require('./api');
+const core = require('./core');
 const bodyParser = require('body-parser');
 
 
@@ -42,5 +43,10 @@ app.post('/testnet/leverage', async (req, res) => {
     res.json(result);
 });
 
+
+app.get('/testnet/long', async(req, res) => {
+    core.enterLongPos({ "leverage": 5 });
+    res.end('testing');
+});
 
 app.listen(process.env.PORT || 8000, () => console.log('bitmex api bot running on port: ' + (process.env.PORT || 8000)));

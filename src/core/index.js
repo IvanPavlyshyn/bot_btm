@@ -110,6 +110,8 @@ const enterLongPos = async (data) => {
 }
 
 
+module.exports = { enterLongPos }
+
 /*
 
 (async () => {
