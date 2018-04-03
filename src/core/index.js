@@ -2,7 +2,7 @@
 
 const bitmex = require('../api');
 const percentPerPos = 0.2; // 20% of current balance
-const percentPerBuy = 1; //0.995;
+const percentPerBuy = 1; //0.995; 1.005
 const EventEmitter = require('events').EventEmitter;
 
 const emitter = new EventEmitter();
