@@ -1,6 +1,7 @@
 "use strict";
 
 const EventEmitter = require('events').EventEmitter;
+const mongo = require('../db');
 
 /*
 * TODO:
@@ -11,24 +12,24 @@ const EventEmitter = require('events').EventEmitter;
 * add custom parameters
 */
 const BitMEXClient = (data) => {
-    const { percentPerSell, percentPerPos, percentPerBuy } = data;
+    const { priceDiff, pctPerPos, leverage, stopLossDiff, stopLoss, takeProfit } = data; 
     const bitmex = require('./bitmex-api');
     const emitter = new EventEmitter();
 
     emitter.on('LongFinalStep', async (data) => {
         try {
             let { contractQty, buyPrice } = data;
-            let stopPrice = parseInt(buyPrice * 0.98);
+            let stopPrice = parseInt(buyPrice * (1 - stopLoss)); // for example stopLoss 0.02
             let stopOrd = {
                 "symbol": "XBTUSD",
                 "side": "Sell",
                 "ordType": "StopLimit",
                 "orderQty": contractQty,
                 "price": stopPrice,
-                "stopPx": stopPrice - 25
+                "stopPx": stopPrice - stopLossDiff
             };
             let stopOrdResult = await bitmex.setOrder(stopOrd);
-            let profitPrice = parseInt(buyPrice * 1.03);
+            let profitPrice = parseInt(buyPrice * (1 + takeProfit )); // should be 0.03
             let profitOrd = {
                 "symbol": "XBTUSD",
                 "side": "Sell",
@@ -39,9 +40,10 @@ const BitMEXClient = (data) => {
             let profitOrdResult = await bitmex.setOrder(profitOrd);
         } catch (err) {
             console.log(err);
-        }
-        //tadam!!!
+            await mongo.insert('Errors', { "exchange": "bitmex", "error": err });
+        }     
     });
+
     emitter.on('ShortFinalStep', async (data) => {
         try {
             let { contractQty, sellPrice } = data;
@@ -52,7 +54,7 @@ const BitMEXClient = (data) => {
                 "ordType": "StopLimit",
                 "orderQty": contractQty,
                 "price": stopPrice,
-                "stopPx": stopPrice + 25
+                "stopPx": stopPrice + stopLossDiff
             };
             let stopOrdResult = await bitmex.setOrder(stopOrd);
             let profitPrice = parseInt(sellPrice * 0.97);
@@ -66,43 +68,36 @@ const BitMEXClient = (data) => {
             let profitOrdResult = await bitmex.setOrder(profitOrd);
         } catch (err) {
             console.log(err);
-        }
-        //tadam!!!
+            await mongo.insert('Errors', { "exchange": "bitmex", "error": err });
+        }      
     });
 
-    const cancelPrevOrders = async () => {
-
-    }
-
-    const openShort = async (leverage) => {
-        //const { leverage } = data;
+    const openShort = async (data) => { //TODO: add custom params for function
+             
         try {
             let posResults = await bitmex.getPosition({
                 "symbol": "XBTUSD"
             });
             let position = posResults[0];
-            if (position.currentQty > 0) {
-                const posQty = position.currentQty;
-                const data = {
+            if (position.currentQty >= 0) {
+                // exit from position
+                let exitResult = await bitmex.setOrder({
                     "symbol": "XBTUSD",
-                    "side": "Sell",
-                    "ordType": "Market",
-                    "orderQty": posQty
-                }
-                let ordResult = await bitmex.setOrder(data);
-            } else if (position.currentQty === 0) {
-
+                    "execInst": "Close"
+                });
+                // cancel all orders
+                let cancelResult = await bitmex.cancelOrder({ "symbol": "XBTUSD" });
                 let levResult = await bitmex.setLeverage({
                     "symbol": "XBTUSD",
                     "leverage": leverage || "5"
                 });
                 let wallSummary = await bitmex.walletSummary();
                 let balance = parseFloat(wallSummary.pop().walletBalance);
-                let bid = (balance * percentPerPos * (leverage || 5)) / 100000000;
+                let bid = (balance * pctPerPos * (leverage || 5)) / 100000000;
                 let instResult = await bitmex.getInstrument();
                 let lastPrice = parseFloat(instResult[0].lastPrice);
                 let contractQty = parseInt(lastPrice * bid);
-                let sellPrice = parseInt(lastPrice * percentPerSell); // 1.005
+                let sellPrice = parseInt(lastPrice * ( 1 + priceDiff)); // 1.005
                 let sellOrderResult = await bitmex.setOrder({
                     "symbol": "XBTUSD",
                     "side": "Sell",
@@ -130,24 +125,24 @@ const BitMEXClient = (data) => {
 
         } catch (err) {
             console.log(err); // store to mongodb
+            await mongo.insert('Errors', { "exchange": "bitmex", "error": err });
         }
     }
-    const openLong = async (leverage) => {
+    const openLong = async (data) => { //TODO: add custom params for function
+        
         try {
             let posResults = await bitmex.getPosition({
                 "symbol": "XBTUSD"
             });
             let position = posResults[0];
-            if (position.currentQty < 0) {
-                const posQty = position.currentQty;
-                const data = {
+            if (position.currentQty <= 0) {
+                // exit from position
+                let exitResult = await bitmex.setOrder({
                     "symbol": "XBTUSD",
-                    "side": "Buy",
-                    "ordType": "Market",
-                    "orderQty": posQty
-                }
-                let ordResult = await bitmex.setOrder(data);
-            } else if (position.currentQty === 0 || position.currentQty < 0) {
+                    "execInst": "Close"
+                });
+                // cancel all orders
+                let cancelResult = await bitmex.cancelOrder({ "symbol": "XBTUSD" });
                 let levResult = await bitmex.setLeverage({
                     "symbol": "XBTUSD",
                     "leverage": leverage || "5"
@@ -155,11 +150,11 @@ const BitMEXClient = (data) => {
                 let wallSummary = await bitmex.walletSummary();
 
                 let balance = parseFloat(wallSummary.pop().walletBalance); // get satoshi balance, should be divided by 1 000 000 00          
-                let bid = (balance * percentPerPos * (leverage || 5)) / 100000000;
+                let bid = (balance * pctPerPos * (leverage || 5)) / 100000000;
                 let instResult = await bitmex.getInstrument();
                 let lastPrice = parseFloat(instResult[0].lastPrice);
                 let contractQty = parseInt(lastPrice * bid); // store to mongo       
-                let buyPrice = parseInt(lastPrice * percentPerBuy); // store to mongo      
+                let buyPrice = parseInt(lastPrice * ( 1 - priceDiff)); // store to mongo      
                 let buyOrderResult = await bitmex.setOrder({
                     "symbol": "XBTUSD",
                     "side": "Buy",
@@ -187,6 +182,7 @@ const BitMEXClient = (data) => {
             }
         } catch (err) {
             console.log(err); // store to mongodb
+            await mongo.insert('Errors', { "exchange": "bitmex", "error": err });
         }
     }
 
@@ -197,20 +193,20 @@ const BitMEXClient = (data) => {
 }
 
 
-let BitMEX = BitMEXClient({ percentPerBuy: "1", percentPerPos: "0.2", percentPerSell: "1" });
+let BitMEX = BitMEXClient({ priceDiff : 0.0025, pctPerPos: 0.2 , leverage: 5, stopLossDiff: 5, stopLoss: 0.02, takeProfit: 0.03 });
 
 setTimeout(() => {
     (async () => { // simpleValue:-7661.5, currentQty:-7682 / short
         try {
             //await BitMEX.openShort();
-            //await BitMEX.openLong();
-            
+            await BitMEX.openLong();
+
             const bitmex = require('./bitmex-api');
-            
+            /*
             await bitmex.setOrder({
                 "symbol":"XBTUSD",
                 "execInst": "Close"
-            }); 
+            }); */
             /*
             let orders = await bitmex.getOrder({
                 "symbol": "XBTUSD",

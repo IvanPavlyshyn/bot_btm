@@ -85,6 +85,27 @@ const getOrder = async (data) => {
     });
 }
 
+const cancelOrder = async (data) => {
+    const verb = 'DELETE';
+    const path = '/api/v1/order/all';    
+    const postBody = JSON.stringify(data);
+    const headers = await createHeaders(verb, path, postBody);
+
+    const requestOptions = {
+        headers: headers,
+        url: 'https://testnet.bitmex.com' + path,
+        method: verb,
+        body: postBody
+    };
+
+    return new Promise((resolve, reject) => {
+        request(requestOptions, function (error, response, body) {
+            if (error) reject(error);
+            else resolve(JSON.parse(body));
+        });
+    });
+}
+
 const getPosition = async () => {
     const verb = 'GET';
     const path = '/api/v1/position';
@@ -154,6 +175,7 @@ const getInstrument = async () => {
 module.exports = {
     getOrder,
     setOrder,
+    cancelOrder,
     setLeverage,
     getPosition,
     walletSummary,

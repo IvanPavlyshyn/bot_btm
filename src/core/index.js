@@ -1,8 +1,8 @@
 'use strict';
 
 const bitmex = require('../api');
-const percentPerPos = 0.2; // 20% of current balance
-const percentPerBuy = 1; //0.995; 1.005
+const pctPerPos = 0.2; // 20% of current balance
+const priceDiff = 1; //0.995; 1.005
 const EventEmitter = require('events').EventEmitter;
 
 const emitter = new EventEmitter();
@@ -71,14 +71,14 @@ const enterLongPos = async (data) => {
         //console.log(wallSummary);
         let balance = parseFloat(wallSummary.pop().walletBalance); // get satoshi balance, should be divided by 1 000 000 00
         //console.log(balance);
-        let bid = (balance * percentPerPos * (leverage || 5)) / 100000000;
+        let bid = (balance * pctPerPos * (leverage || 5)) / 100000000;
         let instResult = await bitmex.getInstrument(); // TODO: store result to mongodb
         //console.log(instResult);
         let lastPrice = parseFloat(instResult[0].lastPrice);
         //console.log(lastPrice);
         let contractQty = parseInt(lastPrice * bid); // store to mongo
         //console.log(contractQty);        
-        let buyPrice = parseInt(lastPrice * percentPerBuy); // store to mongo
+        let buyPrice = parseInt(lastPrice * priceDiff); // store to mongo
         //console.log(buyPrice);
         let buyOrderResult = await bitmex.setOrder({
             "symbol": "XBTUSD",
