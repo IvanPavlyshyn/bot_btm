@@ -56,7 +56,6 @@ const posIsOpen = async () => {
     } else return Promise.resolve(posResults);
 }
 
-
 const enterLongPos = async (data) => {
     const { leverage } = data;
     // first get position, if it's opened then post market order to exit

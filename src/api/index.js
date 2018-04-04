@@ -63,6 +63,28 @@ const setOrder = (data) => {
     });
 };
 
+const getOrder = (data) => {
+    const verb = 'GET';
+    const path = '/api/v1/order';
+    //const data = { symbol: "XBTUSD", orderQty: 1000, price: 8000, ordType: "StopLimit", side: "Sell", stopPx: "7900" };
+    const postBody = JSON.stringify(data);
+    const headers = createHeaders(verb, path, postBody);
+
+    const requestOptions = {
+        headers: headers,
+        url: 'https://testnet.bitmex.com' + path,
+        method: verb,
+        body: postBody
+    };
+
+    return new Promise((resolve, reject) => {
+        request(requestOptions, function (error, response, body) {
+            if (error) reject(error);
+            else resolve(JSON.parse(body));
+        });
+    });
+}
+
 const getPosition = () => {
     const verb = 'GET';
     const path = '/api/v1/position';
