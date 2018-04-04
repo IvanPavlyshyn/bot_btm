@@ -71,7 +71,7 @@ const BitMEXClient = (data) => {
     });
 
     const cancelPrevOrders = async () => {
-        
+
     }
 
     const openShort = async (leverage) => {
@@ -204,15 +204,22 @@ setTimeout(() => {
         try {
             //await BitMEX.openShort();
             //await BitMEX.openLong();
+            
             const bitmex = require('./bitmex-api');
+            
+            await bitmex.setOrder({
+                "symbol":"XBTUSD",
+                "execInst": "Close"
+            }); 
+            /*
             let orders = await bitmex.getOrder({
                 "symbol": "XBTUSD",
                 "count": "5",
                 "reverse": "true"
             });
-            console.log(orders);
+            console.log(orders); 
             //let pos = await bitmex.getPosition();
-            //console.log(pos);
+            //console.log(pos); */
         } catch (err) {
             console.log(err);
         }
