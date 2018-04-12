@@ -1,7 +1,7 @@
 "use strict";
 
 const EventEmitter = require('events').EventEmitter;
-const mongo = require('../src/db');
+const mongo = require('../db');
 
 let validator = {
     "priceDiff": "number",

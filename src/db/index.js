@@ -1,10 +1,8 @@
 'use strict';
 
 const MongoClient = require('mongodb').MongoClient;
-const DB_NAME = require('../../config').MONGO_DB_NAME;
-const DB_URL = require('../../config').MONGO_URL;
-const DB_PASS = require('../../config').MONGO_DB_PASS;
 const moment = require('moment');
+const  { DB_NAME, DB_URL, DB_PASS } = require('../../config');
 
 // 'heroku_vh901gld'
 let MongoDb = (() => {    

@@ -1,6 +1,6 @@
 'use strict';
 
-const BitMEX = require('../bitmex-client');
+const BitMEX = require('../client');
 const db = require('../db');
 
 const Router = app => {
@@ -11,7 +11,11 @@ const Router = app => {
         let token = req.query.Token || req.query.token;
         let type = req.body.type || req.body.Type;
         const result = await mongo.get('Users', {});
-        result.map(profile => (profile.token === token) ? BitMEX(req.body, profile) : null );
+        result.map(profile => {
+            if(profile.token === token && type === "long") BitMEX(req.body, profile).openLong();
+            else if(profile.token === token && type === "short") BitMEX(req.body, profile).openShort();
+            else console.log(`TOKEN: ${profile.token === token} and TYPE: ${(type === "long") || (type === "short")}`);
+        });
     });
 
     app.post('/testnet/long', async (req, res) => {
@@ -36,7 +40,11 @@ const Router = app => {
         let token = req.query.Token || req.query.token;
         let type = req.body.type || req.body.Type;
         const result = await mongo.get('Users', {});
-        result.map(profile => (profile.token === token) ? BitMEX(req.body, profile) : null );
+        result.map(profile => {
+            if(profile.token === token && type === "long") BitMEX(req.body, profile).openLong();
+            else if(profile.token === token && type === "short") BitMEX(req.body, profile).openShort();
+            else console.log(`TOKEN: ${profile.token === token} and TYPE: ${(type === "long") || (type === "short")}`);
+        });
     });
 
     app.post('/bitmex/long', async (req, res) => {
