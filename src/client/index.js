@@ -12,6 +12,13 @@ let validator = {
     "takeProfit": "number"
 }
 
+// TODO: 
+/*
+* add exit from all positions
+* add close all orders
+*
+**/
+
 const BitMEXClient = (data, profile) => {
 
     for(let p in validator) 
