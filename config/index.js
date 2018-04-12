@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    MONGO_URL: 'mongodb://crypto-db.documents.azure.com:10255/?ssl=true',
-    MONGO_DB_NAME: 'crypto-db',
-    MONGO_DB_PASS: 'twgSXnQoULm3uXn6Lj3KMnImx1g5rkn9aTDcfBIqhWWh0aR77Ttv1DbcaIXijwb3Z2DThv9HVsWTDN3TiZJQQg==',
+    MONGO_DB_URL: 'mongodb://cryptomongo.documents.azure.com:10255/?ssl=true',
+    MONGO_DB_NAME: 'cryptomongo',
+    MONGO_DB_PASS: 'd2PGdMO6gJHxwGORtP10YQN4go7KGTpL9aRA4R7izYsk6jtpV2eHodC4SBTFPHbQk740dDz952Q5irBxmuy8RQ==',
 }
