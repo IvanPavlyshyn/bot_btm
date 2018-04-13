@@ -41,7 +41,7 @@ const BitMEXClient = (data, profile) => {
                 "price": stopPrice,
                 "stopPx": stopPrice - stopLossDiff
             };
-            console.log(stopOrd);
+            
             let stopOrdResult = await bitmex.setOrder(stopOrd);
             let profitPrice = parseInt(buyPrice * (1.0 + parseFloat(takeProfit ))); // should be 0.03
             
@@ -52,7 +52,7 @@ const BitMEXClient = (data, profile) => {
                 "orderQty": contractQty,
                 "price": profitPrice
             };
-            console.log(profitOrd);
+          
             let profitOrdResult = await bitmex.setOrder(profitOrd);
         } catch (err) {
             console.log(err);
@@ -72,6 +72,7 @@ const BitMEXClient = (data, profile) => {
                 "price": stopPrice,
                 "stopPx": stopPrice + stopLossDiff
             };
+            console.log(stopOrd);
             let stopOrdResult = await bitmex.setOrder(stopOrd);
             let profitPrice = parseInt(sellPrice * (1.0 - parseFloat(takeProfit)));
             let profitOrd = {
@@ -81,6 +82,7 @@ const BitMEXClient = (data, profile) => {
                 "orderQty": contractQty,
                 "price": profitPrice
             };
+            console.log(profitOrd);
             let profitOrdResult = await bitmex.setOrder(profitOrd);
         } catch (err) {
             console.log(err);
@@ -114,7 +116,7 @@ const BitMEXClient = (data, profile) => {
                 let instResult = await bitmex.getInstrument();
                 let lastPrice = parseFloat(instResult[0].lastPrice);
                 let contractQty = parseInt(lastPrice * bid);
-                let sellPrice = parseInt(lastPrice * ( 1 + priceDiff)); // 1.005
+                let sellPrice = parseInt(lastPrice * ( 1 + parseFloat(priceDiff))); // 1.005
                 let sellOrderResult = await bitmex.setOrder({
                     "symbol": "XBTUSD",
                     "side": "Sell",
@@ -172,7 +174,7 @@ const BitMEXClient = (data, profile) => {
                 let instResult = await bitmex.getInstrument();
                 let lastPrice = parseFloat(instResult[0].lastPrice);
                 let contractQty = parseInt(lastPrice * bid); // store to mongo       
-                let buyPrice = parseInt(lastPrice * ( 1 - priceDiff)); // store to mongo      
+                let buyPrice = parseInt(lastPrice * ( 1.0 - parseFloat(priceDiff))); // store to mongo      
                 let buyOrderResult = await bitmex.setOrder({
                     "symbol": "XBTUSD",
                     "side": "Buy",
