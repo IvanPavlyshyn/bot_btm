@@ -13,6 +13,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
 router(server);
+//
 
 server.listen(process.env.PORT || 8000, () => console.log('bitmex api bot running on port: ' + (process.env.PORT || 8000)));
 

@@ -32,7 +32,7 @@ const BitMEXClient = (data, profile) => {
     emitter.on('LongFinalStep', async (data) => {
         try {
             let { contractQty, buyPrice } = data;
-            let stopPrice = parseInt(buyPrice * (1 - parseFloat(stopLoss))); // for example stopLoss 0.02
+            let stopPrice = parseInt(buyPrice * (1.0 - parseFloat(stopLoss))); // for example stopLoss 0.02
             let stopOrd = {
                 "symbol": "XBTUSD",
                 "side": "Sell",
@@ -41,8 +41,9 @@ const BitMEXClient = (data, profile) => {
                 "price": stopPrice,
                 "stopPx": stopPrice - stopLossDiff
             };
+            console.log(stopOrd);
             let stopOrdResult = await bitmex.setOrder(stopOrd);
-            let profitPrice = parseInt(buyPrice * (1 + parseFloat(takeProfit ))); // should be 0.03
+            let profitPrice = parseInt(buyPrice * (1.0 + parseFloat(takeProfit ))); // should be 0.03
             
             let profitOrd = {
                 "symbol": "XBTUSD",
@@ -51,6 +52,7 @@ const BitMEXClient = (data, profile) => {
                 "orderQty": contractQty,
                 "price": profitPrice
             };
+            console.log(profitOrd);
             let profitOrdResult = await bitmex.setOrder(profitOrd);
         } catch (err) {
             console.log(err);
