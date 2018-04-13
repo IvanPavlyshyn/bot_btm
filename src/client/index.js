@@ -92,6 +92,7 @@ const BitMEXClient = (data, profile) => {
                 "symbol": "XBTUSD"
             });
             let position = posResults[0];
+            position ? position: position = { currentQty: 0 };
             if (position.currentQty >= 0) {
                 // exit from position
                 let exitResult = await bitmex.setOrder({
@@ -148,6 +149,7 @@ const BitMEXClient = (data, profile) => {
                 "symbol": "XBTUSD"
             });
             let position = posResults[0];
+            position ? position: position = { currentQty: 0 };
             if (position.currentQty <= 0) {
                 // exit from position
                 let exitResult = await bitmex.setOrder({
