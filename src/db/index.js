@@ -47,5 +47,14 @@ let MongoDb = (() => {
 
 })();
 
+/*
+setTimeout(() => {
+    MongoDb.insert('Users', {
+        "user":"alex",
+        "pass": "testnet",
+        "apiKey": "etPgAv0KlTRsTwdYBmzgY-Go",
+        "apiSecret":"g22D1OHv85DCOjhj2LJEiLJ2PZJQsXEH5nWfo0cGquqNkYhG"
+    });
+}, 5000); */
 
 module.exports = MongoDb;

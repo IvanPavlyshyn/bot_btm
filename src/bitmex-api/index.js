@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 const BitMEXApi = (profile) => {    
 
-    const { apiKey, apiSecret, apiUrl } = profile;
+    let { apiKey, apiSecret, apiUrl } = profile;
     apiUrl ? apiUrl = 'https://bitmex.com' : apiUrl = 'https://testnet.bitmex.com';
 
     const createHeaders = async (verb, path, postBody) => {

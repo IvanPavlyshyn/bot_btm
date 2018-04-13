@@ -21,8 +21,8 @@ let validator = {
 
 const BitMEXClient = (data, profile) => {
 
-    for(let p in validator) 
-        if(!(typeof data[p] === validator[p])) throw new Error('Validation Error');
+    for(let p in validator)         
+        if(!(typeof parseFloat(data[p]) === validator[p])) throw new Error(`Validation Error: ${p}`);
 
     const { priceDiff, pctPerPos, leverage, stopLossDiff, stopLoss, takeProfit  } = data; 
 

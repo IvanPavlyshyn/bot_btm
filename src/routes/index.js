@@ -1,39 +1,50 @@
 'use strict';
 
 const BitMEX = require('../client');
-const db = require('../db');
+const mongo = require('../db');
 
 const Router = app => {
 
-    app.get('/', (req, res) => res.end(`url: ${req.url} | index route`));    
+    app.get('/', (req, res) => res.end(`url: ${req.url} | index route`));
 
     app.post('/testnet', async (req, res) => {
         let token = req.query.Token || req.query.token;
         let type = req.body.type || req.body.Type;
         const result = await mongo.get('Users', {});
         result.map(profile => {
-            if(profile.token === token && type === "long") BitMEX(req.body, profile).openLong();
-            else if(profile.token === token && type === "short") BitMEX(req.body, profile).openShort();
+            if (profile.token === token && type === "long") BitMEX(req.body, profile).openLong();
+            else if (profile.token === token && type === "short") BitMEX(req.body, profile).openShort();
             else console.log(`TOKEN: ${profile.token === token} and TYPE: ${(type === "long") || (type === "short")}`);
         });
     });
 
     app.post('/testnet/long', async (req, res) => {
-        let { userName, passWord } = req.body;
-        const result = await mongo.get('Users', { user: userName, pass: passWord });
-        result.length ? res.json({ position: "long", status: "ok"}) : res.json({ position: "long", error: "empty profile"});
-        const profile = result.pop();   
-        profile.apiUrl = false;
-        BitMEX(req.body, profile).openLong();        
+        try {
+            let { userName, passWord } = req.body;
+            const result = await mongo.get('Users', { user: userName, pass: passWord });
+            console.log(result[0]);
+            result.length ? res.json({ position: "long", status: "ok" }) : res.json({ position: "long", error: "empty profile" });
+            const profile = result.pop();
+            profile.apiUrl = false;
+            BitMEX(req.body, profile).openLong();
+        } catch (err) {
+            console.log(err);
+            res.json(err);
+        }
     });
 
     app.post('/testnet/short', async (req, res) => {
-        let { userName, passWord } = req.body;
-        const result = await mongo.get('Users', { user: userName, pass: passWord });
-        result.length ? res.json({ position: "long", status: "ok"}) : res.json({ position: "long", error: "empty profile"});
-        const profile = result.pop(); 
-        profile.apiUrl = false;  
-        BitMEX(req.body, profile).openShort();       
+        try {
+            let { userName, passWord } = req.body;
+            const result = await mongo.get('Users', { user: userName, pass: passWord });
+            console.log(result);
+            result.length ? res.json({ position: "long", status: "ok" }) : res.json({ position: "long", error: "empty profile" });
+            const profile = result.pop();
+            profile.apiUrl = false;
+            BitMEX(req.body, profile).openShort();
+        } catch (err) {
+            res.json(err);
+        }
     });
 
     app.post('/bitmex', async (req, res) => {
@@ -41,8 +52,8 @@ const Router = app => {
         let type = req.body.type || req.body.Type;
         const result = await mongo.get('Users', {});
         result.map(profile => {
-            if(profile.token === token && type === "long") BitMEX(req.body, profile).openLong();
-            else if(profile.token === token && type === "short") BitMEX(req.body, profile).openShort();
+            if (profile.token === token && type === "long") BitMEX(req.body, profile).openLong();
+            else if (profile.token === token && type === "short") BitMEX(req.body, profile).openShort();
             else console.log(`TOKEN: ${profile.token === token} and TYPE: ${(type === "long") || (type === "short")}`);
         });
     });
@@ -50,8 +61,8 @@ const Router = app => {
     app.post('/bitmex/long', async (req, res) => {
         let { userName, passWord } = req.body;
         const result = await mongo.get('Users', { user: userName, pass: passWord });
-        result.length ? res.json({ position: "long", status: "ok"}) : res.json({ position: "long", error: "empty profile"});
-        const profile = result.pop();   
+        result.length ? res.json({ position: "long", status: "ok" }) : res.json({ position: "long", error: "empty profile" });
+        const profile = result.pop();
         profile.apiUrl = false;
         BitMEX(req.body, profile).openLong();
     });
@@ -59,9 +70,9 @@ const Router = app => {
     app.post('/bitmex/short', async (req, res) => {
         let { userName, passWord } = req.body;
         const result = await mongo.get('Users', { user: userName, pass: passWord });
-        result.length ? res.json({ position: "long", status: "ok"}) : res.json({ position: "long", error: "empty profile"});
-        const profile = result.pop(); 
-        profile.apiUrl = false;  
+        result.length ? res.json({ position: "long", status: "ok" }) : res.json({ position: "long", error: "empty profile" });
+        const profile = result.pop();
+        profile.apiUrl = false;
         BitMEX(req.body, profile).openShort();
     });
 
