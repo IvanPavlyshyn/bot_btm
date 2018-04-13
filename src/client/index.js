@@ -39,7 +39,7 @@ const BitMEXClient = (data, profile) => {
                 "ordType": "StopLimit",
                 "orderQty": contractQty,
                 "price": stopPrice,
-                "stopPx": stopPrice - stopLossDiff
+                "stopPx": stopPrice - parseFloat(stopLossDiff)
             };
             
             let stopOrdResult = await bitmex.setOrder(stopOrd);
@@ -70,7 +70,7 @@ const BitMEXClient = (data, profile) => {
                 "ordType": "StopLimit",
                 "orderQty": contractQty,
                 "price": stopPrice,
-                "stopPx": stopPrice + stopLossDiff
+                "stopPx": stopPrice + parseFloat(stopLossDiff)
             };
             console.log(stopOrd);
             let stopOrdResult = await bitmex.setOrder(stopOrd);
