@@ -63,7 +63,7 @@ const BitMEXClient = (data, profile) => {
     emitter.on('ShortFinalStep', async (data) => {
         try {
             let { contractQty, sellPrice } = data;
-            let stopPrice = parseInt(sellPrice * (1 + parseFloat(stopLoss)));
+            let stopPrice = parseInt(sellPrice * (1.0 + parseFloat(stopLoss)));
             let stopOrd = {
                 "symbol": "XBTUSD",
                 "side": "Buy",
@@ -73,7 +73,7 @@ const BitMEXClient = (data, profile) => {
                 "stopPx": stopPrice + stopLossDiff
             };
             let stopOrdResult = await bitmex.setOrder(stopOrd);
-            let profitPrice = parseInt(sellPrice * (1 - parseFloat(takeProfit)));
+            let profitPrice = parseInt(sellPrice * (1.0 - parseFloat(takeProfit)));
             let profitOrd = {
                 "symbol": "XBTUSD",
                 "side": "Buy",
