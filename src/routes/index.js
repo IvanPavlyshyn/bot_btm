@@ -7,6 +7,18 @@ const Router = app => {
 
     app.get('/', (req, res) => res.end(`url: ${req.url} | index route`));
 
+    app.post('/user', async (req, res) => {
+        // создать профайл на основе входящего Json тела или будет создан юзер по умолчанию если тело пустое(чисто для теста)
+        let newProfile = req.body || {
+            "user":"testName",
+            "pass": "testnet",
+            "apiKey": "etPgAv0KlTRsTwdYBmzgY-Go",
+            "apiSecret":"g22D1OHv85DCOjhj2LJEiLJ2PZJQsXEH5nWfo0cGquqNkYhG"
+        };
+        let result = await mongo.insert('Users', newProfile);
+        res.json(result);
+    });
+
     app.post('/testnet', async (req, res) => {
         let token = req.query.Token || req.query.token;
         let type = req.body.type || req.body.Type;

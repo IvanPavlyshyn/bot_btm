@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    MONGO_DB_URL: 'mongodb://cryptomongo.documents.azure.com:10255/?ssl=true',
-    MONGO_DB_NAME: 'cryptomongo',
-    MONGO_DB_PASS: 'd2PGdMO6gJHxwGORtP10YQN4go7KGTpL9aRA4R7izYsk6jtpV2eHodC4SBTFPHbQk740dDz952Q5irBxmuy8RQ==',
+    MONGO_DB_URL: 'mongodb://skylabmongo.documents.azure.com:10255/?ssl=true',
+    MONGO_DB_NAME: 'skylabmongo',
+    MONGO_DB_PASS: '2V7ogTH6al3QYf7HW7fFTX1yhDqsWojU9NHDfnXhJQcJmLfLnGbxBQSP5oug1YSw9kTrhLaobEZwl7dovHYtvA==',
 }
